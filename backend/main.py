@@ -59,12 +59,18 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware
+# CORS configuration for production
+allowed_origins = [
+    "http://localhost:3000",  # Local development
+    "https://rx-assistant-frontend.onrender.com",  # Render frontend
+    "https://darshiyer.github.io",  # GitHub Pages
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
